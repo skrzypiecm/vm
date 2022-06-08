@@ -2,9 +2,10 @@
 
 namespace VendingMachine\Action;
 
-use http\Env\Response;
 use VendingMachine\Response\ResponseInterface;
+use VendingMachine\Response\Response;
 use VendingMachine\VendingMachineInterface;
+
 
 class Action extends InputActions implements ActionInterface
 {
@@ -34,13 +35,16 @@ class Action extends InputActions implements ActionInterface
 
             return new Response("Money Inserted!");
         }
-        elseif (preg_match(self::ACTION_GET_ITEM, $this->userInput) ? true : false)
+        elseif ( preg_match(self::ACTION_GET_ITEM, $this->userInput) ? true : false )
         {
             return new Response("Here you are");
         }
-        elseif ($this->actionName === self::ACTION_RETURN_MONEY)
+        elseif ( $this->actionName === self::ACTION_RETURN_MONEY )
         {
-            return new Response("Test return")
+            return new Response("Test return");
+        }
+        else {
+            return new Response();
         }
     }
 

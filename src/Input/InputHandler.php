@@ -2,15 +2,20 @@
 
 namespace VendingMachine\Input;
 
+use VendingMachine\Action\InputActions;
 use VendingMachine\Exception\InvalidInputException;
 use VendingMachine\VendingMachineInterface;
 
-class InputHandler implements InputHandlerInterface
+class InputHandler extends InputActions implements InputHandlerInterface
 {
     const COMMAND_NOT_FOUND = 'This command was not found';
 
     public function __construct( private string $userInput ){
-        if($this->userInput !== "N" || $this->userInput !== "D" || $this->userInput !== "Q" || $this->userInput !== "DOLLAR" || $this->userInput !== "RETURN-MONEY" || preg_match('/GET.*/', $this->userInput) ? false : true)
+        $addMoneyKeys = array_keys(self::ACTION_ADD_MONEY);
+
+        if( preg_match('/'.self::ACTION_GET_ITEM.'.*/', $this->userInput ) ? true : false || in_array( $this->userInput, $addMoneyKeys )  || $this->userInput == self::ACTION_RETURN_MONEY )
+            return;
+        else
             throw new InvalidInputException(self::COMMAND_NOT_FOUND);
     }
 
