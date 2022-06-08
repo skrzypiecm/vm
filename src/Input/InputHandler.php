@@ -8,7 +8,7 @@ use VendingMachine\VendingMachineInterface;
 class InputHandler implements InputHandlerInterface
 {
     public function __construct( private string $userInput ){
-        if($userInput == "N" || $userInput == "D" || $userInput == "Q" || $userInput == "DOLLAR" || $userInput == "RETURN-MONEY")
+        if($this->userInput == "N" || $this->userInput == "D" || $this->userInput == "Q" || $this->userInput == "DOLLAR" || $this->userInput == "RETURN-MONEY" || preg_match('/GET-.*/', $this->userInput) ? true : false)
             $this->getInput();
         else
             throw new InvalidInputException('This command was not found');

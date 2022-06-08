@@ -17,4 +17,25 @@ class InputHandlerTest extends \PHPUnit\Framework\TestCase
         new InputHandler("T");
     }
 
+    public function testShouldReturnInputObjectWhenUserWroteCorrectCommand()
+    {
+        //Given
+        $commands = [
+            "GET-",
+            "N",
+            "D",
+            "Q",
+            "DOLLAR",
+            "RETURN-MONEY",
+        ];
+        //When
+        foreach($commands as $command)
+        {
+            new InputHandler($command);
+        }
+
+        //Then
+
+     }
+
 }
