@@ -1,6 +1,6 @@
 <?php
 
-namespace units\Input;
+namespace Tests\Unit\Input;
 
 use PHPUnit\Framework\TestCase;
 use VendingMachine\Action\Action;
@@ -8,7 +8,7 @@ use VendingMachine\Input\Input;
 
 class InputTest extends TestCase
 {
-    public function testShouldCheckTheReturnTypeOfValueFromTheGetActionMethod()
+    public function testShouldCheckTheReturnValueFromTheGetActionMethod()
     {
         //Given
         $command = "N";
