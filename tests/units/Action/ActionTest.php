@@ -19,5 +19,17 @@ class ActionTest extends TestCase
 
         //Then
         $this->assertSame($expected, $current);
+    }
+    
+    public function testShouldChecksThatTheHandleMethodRecognizesCommandsWell()
+    {
+        //Given
+        $command = "N";
+        $actionObject = new Action($command);
+
+        //When
+
+        //Then
+            
      }
 }
