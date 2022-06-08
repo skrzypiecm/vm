@@ -4,9 +4,29 @@ namespace Tests\Unit\Input;
 
 use VendingMachine\Exception\InvalidInputException;
 use VendingMachine\Input\InputHandler;
+use VendingMachine\Input\Input;
 
 class InputHandlerTest extends \PHPUnit\Framework\TestCase
 {
+    private array $allowCommands = [
+        "GET-",
+        "N",
+        "D",
+        "Q",
+        "DOLLAR",
+        "RETURN-MONEY",
+    ];
+
+    private array $inputHandlers = [];
+
+    public function setUp(): void
+    {
+        foreach($this->allowCommands as $command)
+        {
+            $this->inputHandlers[$command] = new InputHandler($command);
+        }
+    }
+
     public function testShouldDetectWhatUserWroteAndThrowExceptionWhenUserWroteUndeclaredCommand()
     {
         // Except
@@ -19,23 +39,11 @@ class InputHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldReturnInputObjectWhenUserWroteCorrectCommand()
     {
-        //Given
-        $commands = [
-            "GET-",
-            "N",
-            "D",
-            "Q",
-            "DOLLAR",
-            "RETURN-MONEY",
-        ];
         //When
-        foreach($commands as $command)
+        foreach($this->inputHandlers as $command => $inputHandler)
         {
-            new InputHandler($command);
+            $this->assertEquals(new Input($command), $inputHandler->getInput());
         }
-
-        //Then
-
      }
 
 }
