@@ -35,16 +35,16 @@ class Action extends InputActions implements ActionInterface
 
             return new Response("Money Inserted!");
         }
-        elseif ( preg_match(self::ACTION_GET_ITEM, $this->userInput) ? true : false )
+        else if ( $this->checkGetInputPattern($this->actionName) )
         {
             return new Response("Here you are");
         }
-        elseif ( $this->actionName === self::ACTION_RETURN_MONEY )
+        else if ( $this->actionName === self::ACTION_RETURN_MONEY )
         {
             return new Response("Test return");
         }
         else {
-            return new Response();
+            return new Response("");
         }
     }
 
