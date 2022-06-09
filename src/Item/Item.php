@@ -4,19 +4,52 @@ namespace VendingMachine\Item;
 
 class Item implements ItemInterface
 {
+    /**
+     * @param string $code
+     * @param string $price
+     * @param int $count
+     */
+    public function __construct( private string $code, private string $price, private int $count = 1 ) {}
 
-    public function getPrice(): float
+    /**
+     * @return float
+     */
+    public function getPrice() : float
     {
-        // TODO: Implement getPrice() method.
+        return $this->price;
     }
 
-    public function getCount(): int
+    /**
+     * @return int
+     */
+    public function getCount() : int
     {
-        // TODO: Implement getCount() method.
+        return $this->count;
     }
 
-    public function getCode(): ItemCodeInterface
+    /**
+     * @return ItemCodeInterface
+     */
+    public function getCode() : ItemCodeInterface
     {
-        // TODO: Implement getCode() method.
+        return new ItemCode($this->code);
+    }
+
+    /**
+     * @return void
+     */
+    public function decrementCount() : void
+    {
+        if( $this->getCount() > 0)
+            $this->count -= 1;
+
+    }
+
+    /**
+     * @return void
+     */
+    public function incrementCount() : void
+    {
+        $this->count += 1;
     }
 }

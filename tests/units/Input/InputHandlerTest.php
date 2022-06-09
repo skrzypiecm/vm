@@ -44,6 +44,6 @@ class InputHandlerTest extends \PHPUnit\Framework\TestCase
         {
             $this->assertEquals(new Input($command), $inputHandler->getInput());
         }
-     }
+    }
 
 }

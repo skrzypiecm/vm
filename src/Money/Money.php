@@ -2,15 +2,36 @@
 
 namespace VendingMachine\Money;
 
-class Money implements MoneyInterface
+use VendingMachine\Action\InputActions;
+
+class Money extends InputActions implements MoneyInterface
 {
-    public function getValue(): float
+    /**
+     * @var float
+     */
+    private float $value;
+
+    /**
+     * @param string $code
+     */
+    public function __construct(private string $code)
     {
-        // TODO: Implement getValue() method.
+        $this->value = self::ACTION_ADD_MONEY[strval($this->code)];
     }
 
+    /**
+     * @return float
+     */
+    public function getValue(): float
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return string
+     */
     public function getCode(): string
     {
-        // TODO: Implement getCode() method.
+        return $this->code;
     }
 }

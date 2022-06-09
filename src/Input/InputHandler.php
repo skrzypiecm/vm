@@ -10,7 +10,7 @@ class InputHandler extends InputActions implements InputHandlerInterface
 {
     const COMMAND_NOT_FOUND = 'This command was not found';
 
-    public function __construct( private string $userInput )
+    public function __construct( private string $userInput)
     {
         $addMoneyKeys = array_keys(self::ACTION_ADD_MONEY);
 
@@ -22,6 +22,6 @@ class InputHandler extends InputActions implements InputHandlerInterface
 
     public function getInput() : InputInterface
     {
-        return new Input( $this->userInput );
+        return new Input( $this->userInput);
     }
 }

@@ -6,23 +6,52 @@ use VendingMachine\Exception\ItemNotFoundException;
 
 class ItemCollection implements ItemCollectionInterface
 {
-    public function add(ItemInterface $item): void
+    /**
+     * @var array
+     */
+    private array $itemCollection = [];
+
+    /**
+     * @param ItemInterface $item
+     * @return void
+     */
+    public function add( ItemInterface $item ) : void
     {
-        // TODO: Implement add() method.
+        if( isset($this->itemCollection[ strval($item->getCode()) ]) )
+            $this->itemCollection[strval($item->getCode())]->incrementCount();
+        else
+            $this->itemCollection[strval($item->getCode())] = $item;
     }
 
-    public function get(ItemCodeInterface $itemCode): ItemInterface
+    /**
+     * @param ItemCodeInterface $itemCode
+     * @throws ItemNotFoundException
+     * @return ItemInterface
+     */
+    public function get( ItemCodeInterface $itemCode ) : ItemInterface
     {
-        // TODO: Implement get() method.
+        if( array_key_exists(strval($itemCode), $this->itemCollection) && $this->count($itemCode) > 0 )
+        {
+            return $this->itemCollection[strval($itemCode)];
+        }
+        else
+            throw new ItemNotFoundException("The item you are looking for has not been found.");
     }
 
-    public function count(ItemCodeInterface $itemCode): int
+    /**
+     * @param ItemCodeInterface $itemCode
+     * @return int
+     */
+    public function count( ItemCodeInterface $itemCode ) : int
     {
-        // TODO: Implement count() method.
+        return $this->itemCollection[strval($itemCode)]->getCount();
     }
 
-    public function empty(): void
+    /**
+     * @return void
+     */
+    public function empty() : void
     {
-        // TODO: Implement empty() method.
+        $this->itemCollection = [];
     }
 }
