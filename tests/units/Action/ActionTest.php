@@ -25,14 +25,14 @@ class ActionTest extends TestCase
     public function testShouldChecksThatTheHandleMethodRecognizesCommandsWell()
     {
         $expectedInserMoney = 'Current balance: 0.05 (N)';
-        $expectedGetItem = "B";
+
         //Given
         $command = 'N';
         $vendingMachine = new VendingMachine();
         $actionInsertMoneyObject = new Action( $command );
 
         //When
-        $response = strval( $actionObject->handle($vendingMachine) );
+        $response = strval( $actionInsertMoneyObject->handle($vendingMachine) );
 
         //Then
         $this->assertSame($expectedInserMoney, $response);
